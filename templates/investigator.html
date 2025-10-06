@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Investigator Mode</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/investigator.css') }}">
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js"></script>
+</head>
+<body>
+    <!-- Barra superior -->
+    <header class="top-bar">
+        <div class="left">
+            <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="QUAVI Logo" class="nav-logo" ></a>
+        </div>
+        <div class="right">
+            <button class="doc-btn">Documentation</button>
+            <div class="translate">
+                <img src="{{ url_for('static', filename='images/gtranslate.png') }}" alt="Translate" class="translate-icon">
+                <div class="dropdown hidden">
+                    <button class="doc-btn drp-btn"><a href="#" onclick="setLang('en'); return false;">English</a></button>
+                    <button class="doc-btn drp-btn"><a href="#" onclick="setLang('es'); return false;">Español</a></button>
+                    <button class="doc-btn drp-btn"><a href="#" onclick="setLang('zh-CN'); return false;">中文</a></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <!-- Dashboard principal en 2x2 -->
+    <div class="dashboard">
+
+        <!-- Final Classification -->
+        <div class="card prediction">
+            <img src="{{ url_for('static', filename='images/planet.png') }}" alt="Planet" class="planet-img">
+            <div class="prediction-content">
+                <h3>Final Classification</h3>
+                {% if prediction %}
+                    <p class="highlight">{{ prediction.label }}</p>
+                    <p class="confidence">{{ "%.2f"|format(prediction.confidence) }}% Confidence</p>
+                {% else %}
+                    <p>No predictions yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Model Performance -->
+        <div class="card metrics">
+            <h3>Model Performance</h3>
+            <div class="grid-table performance-grid">
+                <div class="mets">Accuracy</div><div>{{ metrics.accuracy }}</div>
+                <div class="mets">Precision</div><div>{{ metrics.precision }}</div>
+                <div class="mets">Recall</div><div>{{ metrics.recall }}</div>
+                <div class="mets">F1-score</div><div>{{ metrics.f1 }}</div>
+                <div class="mets">ROC-AUC</div><div>{{ metrics.roc_auc }}</div>
+            </div>
+        </div>
+
+        <!-- ROC Curve -->
+        <div class="card roc">
+            <h3>ROC Curve</h3>
+            <img src="{{ url_for('static', filename='images/top1_roc_curve.png') }}" alt="ROC Curve" class="roc-img">
+        </div>
+
+        <!-- Detailed Parameters -->
+        <div class="card details">
+            <h3>Detailed Parameters</h3>
+            <div class="grid-table details-grid">
+                <div>Stellar Eclipse</div><div>{{ details.Ste }}</div>
+                <div>Not Transit-Like</div><div>{{ details.Not }}</div>
+                <div>Centroid Offset</div><div>{{ details.Cen }}</div>
+                <div>Ephemeris Match Indicates Contamination</div><div>{{ details.Eph }}</div>
+                <div>Transit Signal-to-Noise</div><div>{{ details.Tra }}</div>
+                <div>Orbital Period</div><div>{{ details.Orb }}</div>
+                <div>Impact Parameter</div><div>{{ details.Imp }}</div>
+                <div>Transit Duration</div><div>{{ details.Tra }}</div>
+                <div>RA</div><div>{{ details.RA }}</div>
+                <div>DEC</div><div>{{ details.DEC }}</div>
+                <div>Confidece</div><div>{{ "%.2f"|format(prediction.confidence) }}%</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/translate.js') }}"></script>
+</body>
+</html>
