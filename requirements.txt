@@ -6,3 +6,9 @@ scikit-learn
 imbalanced-learn
 xgboost
 lightgbm
+Flask==3.0.3
+lightgbm==4.3.0
+scikit-learn==1.5.2
+joblib==1.4.2
+numpy
+pandas
