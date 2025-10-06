@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Explorer Mode</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/explorer.css') }}">
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="left">
+            <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="QUAVI Logo" class="nav-logo" ></a>
+        </div>
+        <div class="right">
+            <button class="doc-btn">Documentation</button>
+            <div class="translate">
+                <img src="{{ url_for('static', filename='images/gtranslate.png') }}" alt="Translate" class="translate-icon">
+                <div class="dropdown hidden">
+                    <div>
+                        <button class="doc-btn drp-btn">
+                            <a href="#" onclick="setLang('en'); return false;" class="btn right">
+                                <img src="{{ url_for('static', filename='images/gb_flag.png') }}" class="flag"> English
+                            </a>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="doc-btn drp-btn">
+                            <a href="#" onclick="setLang('es'); return false;" class="btn right">
+                                <img src="{{ url_for('static', filename='images/sp_flag.png') }}" class="flag"> Español
+                            </a>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="doc-btn drp-btn">
+                            <a href="#" onclick="setLang('zh-CN'); return false;" class="btn right">
+                                <img src="{{ url_for('static', filename='images/ch_flag.png') }}" class="flag"> 中文
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Predicción -->
+        <div class="card">
+            <h3>Model Prediction</h3>
+            {% if prediction %}
+                <p class="highlight">
+                    {{ prediction.label }}
+                </p>
+                {% if prediction.confidence %}
+                <p class="confidence">
+                    {{ "%.2f" | format(prediction.confidence) }}% Confidence
+                </p>
+                {% endif %}
+            {% else %}
+                <p>No predictions yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Timeline -->
+        <div class="card">
+            <h3>Analysis Timeline</h3>
+            <ul class="timeline">
+                <li>Data Acquisition – {{ prediction.timestamp if prediction else "-" }}</li>
+                <li>Model Prediction – {{ prediction.timestamp if prediction else "-" }}</li>
+                <li>SHAP Analysis – {{ prediction.timestamp if prediction else "-" }}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/translate.js') }}"></script>
+</body>
+</html>

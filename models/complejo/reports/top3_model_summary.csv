@@ -1,0 +1,4 @@
+Ranking,Modelo,Imputacion,Escalado,Balanceo,F1-Score (Macro),AUC-ROC (OVO),Hiperparametros
+1,LightGBM,Media,RobustScaler (Robusto a Outliers),RandomOverSampler,0.9051393188854489,0.9767632008995909,"{'estimator__learning_rate': 0.1, 'estimator__n_estimators': 100, 'estimator__num_leaves': 50}"
+2,LightGBM,Media,StandardScaler (No Manejo),RandomOverSampler,0.9039323344993453,0.9756655614893357,"{'estimator__learning_rate': 0.1, 'estimator__n_estimators': 100, 'estimator__num_leaves': 50}"
+3,LightGBM,Media,RobustScaler (Robusto a Outliers),RandomUnderSampler,0.9030224241741135,0.9762821915938401,"{'estimator__learning_rate': 0.05, 'estimator__n_estimators': 100, 'estimator__num_leaves': 31}"

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QUAVI - Science Without Borders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/splash_style.css') }}">
+</head>
+<body class="splash">
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="QUAVI Logo" class="logo">
+        <h1>Science Without Borders</h1>
+        <p class="subtitle">
+            Legacy of Discovery: Inspires educational continuity and pride in belonging to the global scientific community
+        </p>
+        <a href="{{ url_for('main') }}" class="start-btn">START</a>
+    </div>
+</body>
+</html>
